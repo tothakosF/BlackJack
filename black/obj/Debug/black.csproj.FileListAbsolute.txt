@@ -1,0 +1,17 @@
+C:\Users\yukon\Desktop\programok\black\black\bin\Debug\black.exe.config
+C:\Users\yukon\Desktop\programok\black\black\bin\Debug\black.exe
+C:\Users\yukon\Desktop\programok\black\black\bin\Debug\black.pdb
+C:\Users\yukon\Desktop\programok\black\black\obj\Debug\black.csprojAssemblyReference.cache
+C:\Users\yukon\Desktop\programok\black\black\obj\Debug\MainWindow.g.cs
+C:\Users\yukon\Desktop\programok\black\black\obj\Debug\Masodik.g.cs
+C:\Users\yukon\Desktop\programok\black\black\obj\Debug\App.g.cs
+C:\Users\yukon\Desktop\programok\black\black\obj\Debug\black_MarkupCompile.cache
+C:\Users\yukon\Desktop\programok\black\black\obj\Debug\black_MarkupCompile.lref
+C:\Users\yukon\Desktop\programok\black\black\obj\Debug\MainWindow.baml
+C:\Users\yukon\Desktop\programok\black\black\obj\Debug\Masodik.baml
+C:\Users\yukon\Desktop\programok\black\black\obj\Debug\black.g.resources
+C:\Users\yukon\Desktop\programok\black\black\obj\Debug\black.Properties.Resources.resources
+C:\Users\yukon\Desktop\programok\black\black\obj\Debug\black.csproj.GenerateResource.cache
+C:\Users\yukon\Desktop\programok\black\black\obj\Debug\black.csproj.CoreCompileInputs.cache
+C:\Users\yukon\Desktop\programok\black\black\obj\Debug\black.exe
+C:\Users\yukon\Desktop\programok\black\black\obj\Debug\black.pdb
