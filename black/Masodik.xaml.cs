@@ -19,14 +19,91 @@ namespace black
     /// </summary>
     public partial class Masodik : Window
     {
-        int elsosajat, masodiksajat, elsohaz, masodikhaz, sajato, hazo, tet = 0;
+        int sajato, hazo, tet, lap = 0;
         int penzo = 2000;
-
-        private void submit_Click(object sender, RoutedEventArgs e)
+        Random r = new Random();
+        int[] hazlap = {0, 0, 0, 0, 0};
+        int[] sajatlap = { 0, 0, 0, 0, 0};
+        int i = 2;
+        int x = 1;
+        int y = 2;
+        public void ujlap()
         {
+            lap = r.Next(1, 14);
+            if (lap == 1)
+            {
+                //ász
+                lap = 1;
+            }
+            else if (lap > 10)
+            {
+                lap = 10;
+            }
+        }
+        public void huszonegy(bool win)
+        {
+            string text = win ? "Nyertél :)" : "Vesztettél :(";
+            MessageBox.Show(text);
+           
+            
+            /*MainWindow subWindow = new MainWindow();
+            subWindow.Show();
+            MasodikW.Close();*/
+            Double.Visibility = Visibility.Collapsed;
+            Hit.Visibility = Visibility.Collapsed;
+            Stand.Visibility = Visibility.Collapsed;
+            Split.Visibility = Visibility.Collapsed;
+            submit.Visibility = Visibility.Visible;
+            bet.Visibility = Visibility.Visible;
+            betLabel.Visibility = Visibility.Visible;
+            bet.Text = "";
+            sajat.Content = "";
+            haz.Content = "";
+            sajato = 0;
+            penz.Content = "";
+            hazo = 0;
+            i = 2;
+            x = 1;
+            y = 2;
+        }
+        public void submit_Click(object sender, RoutedEventArgs e)
+        {
+            Split.IsEnabled = false;
+            for (int i = 0; i < 5; i++)
+            {
+                lap = r.Next(1, 14);
+                if (lap > 10)
+                {
+                    lap = 10;
+                }
+                sajatlap[i] = lap;
+            }
+            sajato = sajatlap[0] + sajatlap[1];
+            sajat.Content = sajatlap[0] + "+" + sajatlap[1];
+
+            //ház
+            for (int i = 0; i < 5; i++)
+            {
+                lap = r.Next(1, 14);
+                if (lap > 10)
+                {
+                    lap = 10;
+                }
+                hazlap[i] = lap;
+            }
+
+            hazo = hazlap[0] + hazlap[1];
+            haz.Content = hazlap[0];
+
+            betLabel.Visibility = Visibility.Collapsed;
+            submit.Visibility = Visibility.Collapsed;
+            bet.Visibility = Visibility.Collapsed;
+            Double.Visibility = Visibility.Visible;
+            Hit.Visibility = Visibility.Visible;
+            Stand.Visibility = Visibility.Visible;
+            Split.Visibility = Visibility.Visible;
             try
             {
-                int tet;
                 tet = Convert.ToInt32(bet.Text);
                 penz.Content = tet;
                 penzoL.Content = penzo -=  tet;
@@ -34,11 +111,37 @@ namespace black
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+                Double.Visibility = Visibility.Collapsed;
+                Hit.Visibility = Visibility.Collapsed;
+                Stand.Visibility = Visibility.Collapsed;
+                Split.Visibility = Visibility.Collapsed;
+                submit.Visibility = Visibility.Visible;
+                bet.Visibility = Visibility.Visible;
+                betLabel.Visibility = Visibility.Visible;
             }
+        }
 
-            submit.Visibility = Visibility.Collapsed;
-            bet.Visibility = Visibility.Collapsed;
-            
+        private void bet_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (bet.Text != "")
+            {
+                try
+                {
+                    tet = Convert.ToInt32(bet.Text);
+                    if (penzo - tet < 1)
+                    {
+                        submit.IsEnabled = false;
+                    }
+                    else
+                    {
+                        submit.IsEnabled = true;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
         }
 
         public Masodik()
@@ -47,45 +150,60 @@ namespace black
             penzoL.Content = penzo;
         }
 
-        private void teszt_Click(object sender, RoutedEventArgs e)
+        private void Stand_Click(object sender, RoutedEventArgs e)
         {
-            Random r = new Random();
-            elsosajat = r.Next(1,14);
-            if (elsosajat == 1)
+            if (x == 1)
             {
-                //ász
-                elsosajat = 1;
+                haz.Content += "+" + hazlap[x];
+                x++;
             }
-            else if (elsosajat > 10)
+            if (hazo < 17)
             {
-                elsosajat = 10;
+                do
+                {
+                    hazo += hazlap[y];
+                    haz.Content += "+" + hazlap[y];
+                    y++;
+                    if (hazo > 21)
+                    {
+                        huszonegy(true);
+                    }
+                } while (y < 4);
             }
-            masodiksajat = r.Next(1, 14);
-            if (masodiksajat == 1)
+            if (hazo > 21)
             {
-                //ász
-                masodiksajat = 1;
+                huszonegy(false);
             }
-            else if (masodiksajat > 10)
+            if (hazo > 16)
             {
-                masodiksajat = 10;
+                if (hazo > sajato)
+                {
+                    huszonegy(false);
+                }
+                if (sajato > hazo)
+                {
+                    huszonegy(true);
+                }
+                if (hazo == sajato)
+                {
+                    penzo += tet;
+                    
+                }
             }
-            sajato = elsosajat + masodiksajat;
-            sajat.Content = sajato;
+        }
 
-            //ház
-
-            elsohaz = r.Next(1, 14);
-            if (elsohaz == 1)
+        private void Hit_Click(object sender, RoutedEventArgs e)
+        {
+            do
             {
-                //ász
-                elsohaz = 1;
-            }
-            else if (elsohaz > 10)
-            {
-                elsohaz = 10;
-            }
-            haz.Content = elsohaz;
+                sajato += sajatlap[i];
+                sajat.Content += "+" + sajatlap[i];
+                i++;
+                if (sajato > 21)
+                {
+                    huszonegy(false);
+                }
+            } while (i > 4);
         }
     }
 }
