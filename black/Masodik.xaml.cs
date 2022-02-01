@@ -44,6 +44,11 @@ namespace black
         {
             string text = win ? "Nyertél :)" : "Vesztettél :(";
             MessageBox.Show(text);
+            //Új if
+            if (win == true)
+            {
+                penzoL.Content = penzo += tet*2;
+            }
            
             
             /*MainWindow subWindow = new MainWindow();
